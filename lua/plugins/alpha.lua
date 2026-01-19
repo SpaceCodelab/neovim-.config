@@ -1,3 +1,7 @@
+--[[
+--this is the main start screen of nvim but i am disabling it because i want something minimalistic
+--and you can always edit this script according to yourself......
+--
 ---@diagnostic disable: undefined-global
 
 return {
@@ -79,6 +83,66 @@ return {
         }
 
         dashboard.config.opts.noautocmd   = true
+        alpha.setup(dashboard.config)
+    end,
+}
+]]
+
+return {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    config = function()
+        local alpha = require("alpha")
+        local dashboard = require("alpha.themes.dashboard")
+
+        -- Centered Doom-style ASCII: NEOVIM
+        dashboard.section.header.val = {
+            "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+            "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+            "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+            "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+            "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+            "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+            "",
+            "              	Raman's Vim",
+        }
+
+        dashboard.section.buttons.val = {
+            dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("f", "󰱼  Find file", ":Telescope find_files <CR>"),
+            dashboard.button("r", "󰄉  Recent files", ":Telescope oldfiles <CR>"),
+            dashboard.button("g", "󰊢  Git status", ":Telescope git_status <CR>"),
+            dashboard.button("c", "  Config", ":e ~/.config/nvim/init.lua <CR>"),
+            dashboard.button("q", "󰅚  Quit", ":qa <CR>"),
+        }
+
+        dashboard.section.footer.val = {
+            "",
+            "minimal • fast • focused",
+        }
+
+        -- Dynamic vertical centering
+        local function center_padding()
+            local height = vim.fn.winheight(0)
+            return math.floor(height * 0.25)
+        end
+
+        dashboard.config.layout = {
+            { type = "padding", val = center_padding() },
+            dashboard.section.header,
+            { type = "padding", val = 2 },
+            dashboard.section.buttons,
+            { type = "padding", val = 2 },
+            dashboard.section.footer,
+        }
+
+
+
+        dashboard.config.opts.noautocmd = true
+        -- Pale yellow header (Gruvbox-friendly)
+        vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#bb7744" })
+        dashboard.section.header.opts.hl = "AlphaHeader"
+
         alpha.setup(dashboard.config)
     end,
 }
