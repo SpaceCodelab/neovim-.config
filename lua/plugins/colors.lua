@@ -1,37 +1,38 @@
 return {
-    {
+    --[[{
         "sainnhe/gruvbox-material",
         priority = 1000,
         config = function()
-            -- set colorscheme
-
-            -- optional preferred style
-            -- vim.o.background = "dark"    -- (darkest variant)
-            vim.g.gruvbox_material_background = "hard" -- soft / medium / hard
+            vim.o.background = "dark"
+            vim.g.gruvbox_material_background = "hard"
             vim.g.gruvbox_material_foreground = "original"
-            vim.g.gruvbox_material_sign_column_background = "none"
-
+            vim.g.gruvbox_material_dim_inactive_warnings = true
             vim.g.gruvbox_material_enable_bold = true
-            vim.g.gruvbox_material_enable_italic = true
+            vim.g.gruvbox_material_dim = true
 
             vim.cmd("colorscheme gruvbox-material")
         end,
+    },]]
+    {
+        "water-sucks/darkrose.nvim",
+        priority = 1000,
+        config = function()
+            vim.g.darkrose_high_visibility = true
+            vim.g.darkrose_bold_keywords = true
+            vim.g.darkrose_italic_comments = true
+            vim.g.darkrose_italic_strings = false
+            vim.g.darkrose_transparent_background = false
+            vim.cmd("colorscheme darkrose")
+        end,
     },
     --[[{
-        "Shatur/neovim-ayu",
-        priority = 1000, -- load before everything
+        "metalelf0/jellybeans-nvim",
+        priority = 1000,
         config = function()
-            -- ayu style: dark | mirage | light
-            vim.g.ayucolor = "dark"
-
-            -- optional tweaks
-            vim.g.ayu_extended_palette = true
-            vim.g.ayu_mirage = false
-
-            vim.g.ayu_disable_italic = false
-            vim.g.ayu_disable_bold = false
-
-            vim.cmd.colorscheme("ayu")
+            vim.g.jellybeans_overrides = {
+                background = "101010",
+            }
+            vim.cmd("colorscheme jellybeans")
         end,
     },]]
 
@@ -41,7 +42,7 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         opts = {
-            theme = 'gruvbox-material',
+            theme = 'auto',
         }
     },
 }
