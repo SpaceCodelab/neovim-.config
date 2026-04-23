@@ -39,14 +39,14 @@ return {
         })
 
         -- Add borders to floating windows
-        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-            vim.lsp.handlers.hover,
-            { border = 'rounded' }
-        )
-        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-            vim.lsp.handlers.signature_help,
-            { border = 'rounded' }
-        )
+        vim.lsp.handlers['textDocument/hover'] = function(_, result, ctx)
+            local conf = { border = 'rounded' }
+            return vim.lsp.handlers.hover(_, result, ctx, conf)
+        end
+        vim.lsp.handlers['textDocument/signatureHelp'] = function(_, result, ctx)
+            local conf = { border = 'rounded' }
+            return vim.lsp.handlers.signature_help(_, result, ctx, conf)
+        end
 
         -- Configure error/warnings interface
         vim.diagnostic.config({
@@ -97,16 +97,16 @@ return {
 
         require('mason').setup({})
         require('mason-lspconfig').setup({
-            ensure_installed = {
+ensure_installed = {
                 "lua_ls",
                 "clangd",
                 "rust_analyzer",
-                "marksman",
-                "jdtls",
+                "pyright",
             },
             handlers = {
                 function(server_name)
-                    if server_name == "luals" then return end -- avoid starting with {}
+                    if server_name == "luals" then return end
+                    if server_name == "pyright" then return end
                     require('lspconfig')[server_name].setup({})
                 end,
 
@@ -122,6 +122,21 @@ return {
                                 },
                                 workspace = {
                                     library = { vim.env.VIMRUNTIME },
+                                },
+                            },
+                        },
+                    })
+                end,
+
+                pyright = function()
+                    require('lspconfig').pyright.setup({
+                        settings = {
+                            python = {
+                                analysis = {
+                                    autoSearchPaths = true,
+                                    diagnosticMode = 'openFilesOnly',
+                                    useLibraryCodeForTypes = true,
+                                    typeCheckingMode = 'basic',
                                 },
                             },
                         },
