@@ -101,6 +101,7 @@ ensure_installed = {
                 "lua_ls",
                 "clangd",
                 "rust_analyzer",
+                "marksman",
                 "pyright",
             },
             handlers = {
