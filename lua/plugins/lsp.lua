@@ -97,54 +97,43 @@ return {
 
         require('mason').setup({})
         require('mason-lspconfig').setup({
-ensure_installed = {
+            ensure_installed = {
                 "lua_ls",
                 "clangd",
                 "rust_analyzer",
                 "marksman",
                 "pyright",
             },
-            handlers = {
-                function(server_name)
-                    if server_name == "luals" then return end
-                    if server_name == "pyright" then return end
-                    require('lspconfig')[server_name].setup({})
-                end,
-
-                lua_ls = function()
-                    require('lspconfig').luals.setup({
-                        settings = {
-                            Lua = {
-                                runtime = {
-                                    version = 'LuaJIT',
-                                },
-                                diagnostics = {
-                                    globals = { 'vim' },
-                                },
-                                workspace = {
-                                    library = { vim.env.VIMRUNTIME },
-                                },
-                            },
-                        },
-                    })
-                end,
-
-                pyright = function()
-                    require('lspconfig').pyright.setup({
-                        settings = {
-                            python = {
-                                analysis = {
-                                    autoSearchPaths = true,
-                                    diagnosticMode = 'openFilesOnly',
-                                    useLibraryCodeForTypes = true,
-                                    typeCheckingMode = 'basic',
-                                },
-                            },
-                        },
-                    })
-                end,
-            },
         })
+
+        vim.lsp.config.lua_ls = {
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = 'LuaJIT',
+                    },
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        library = { vim.env.VIMRUNTIME },
+                    },
+                },
+            },
+        }
+
+        vim.lsp.config.pyright = {
+            settings = {
+                python = {
+                    analysis = {
+                        autoSearchPaths = true,
+                        diagnosticMode = 'openFilesOnly',
+                        useLibraryCodeForTypes = true,
+                        typeCheckingMode = 'basic',
+                    },
+                },
+            },
+        }
 
         local cmp = require('cmp')
 
