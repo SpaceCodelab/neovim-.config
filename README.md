@@ -8,8 +8,10 @@ Personal Neovim setup using [Lazy.nvim](https://github.com/folke/lazy.nvim) for 
 - [Installation](#installation)
 - [Structure](#structure)
 - [Colorscheme](#colorscheme)
+- [Dashboard](#dashboard)
 - [Keybindings](#keybindings)
   - [General](#general)
+  - [Dashboard](#dashboard-1)
   - [LSP](#lsp)
   - [Telescope](#telescope)
   - [Harpoon](#harpoon)
@@ -49,6 +51,7 @@ On first launch, Lazy.nvim will bootstrap itself and install all plugins. Restar
     │   ├── options.lua        # General editor options
     │   └── keybinds.lua       # Global keymaps
     └── plugins/
+        ├── alpha.lua          # Startup dashboard
         ├── colors.lua         # Colorscheme (darkrose)
         ├── harpoon.lua        # Quick file navigation
         ├── lsp.lua            # LSP, mason, nvim-cmp, snippets
@@ -65,6 +68,10 @@ On first launch, Lazy.nvim will bootstrap itself and install all plugins. Restar
 - Bold keywords, italic comments
 - Transparent background disabled
 
+## Dashboard
+
+The startup dashboard (powered by [alpha-nvim](https://github.com/goolord/alpha-nvim)) features a Harry Potter themed ASCII art header with glasses and lightning bolt, a "You're a wizard, Neovimer" tagline, and a rotating Dumbledore quote in the footer. Vertical centering is dynamic — recalculates on window resize.
+
 ## Keybindings
 
 ### General
@@ -73,6 +80,17 @@ On first launch, Lazy.nvim will bootstrap itself and install all plugins. Restar
 |-----|--------|
 | `<Space>` | Leader key |
 | `<leader>cd` | Open Netrw Explorer |
+
+### Dashboard
+
+| Key | Action |
+|-----|--------|
+| `<leader>e` | New file (Alohomora!) |
+| `<leader>f` | Find files (Accio File!) |
+| `<leader>r` | Recent files (Prior Incantato) |
+| `<leader>g` | Live grep (Legilimens!) |
+| `<leader>c` | Open config (Chamber) |
+| `<leader>q` | Quit (Avada Kedavra!) |
 
 ### LSP
 
@@ -142,6 +160,7 @@ On first launch, Lazy.nvim will bootstrap itself and install all plugins. Restar
 |--------|---------|
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager |
 | [darkrose.nvim](https://github.com/water-sucks/darkrose.nvim) | Colorscheme |
+| [alpha-nvim](https://github.com/goolord/alpha-nvim) | Startup dashboard |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline |
 | [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) | File icons |
 
